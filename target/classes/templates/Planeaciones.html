@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Dashboard Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS
+    -->
+    <link href="http://localhost:8080/appcss/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-usuario-select: none;
+        -moz-usuario-select: none;
+        -ms-usuario-select: none;
+        usuario-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+.grid-container {
+  display: grid;
+  grid-template-columns: auto ;
+  grid-template-rows: auto auto;
+  grid-gap: 2px;
+  background-color: #BCC6CC;
+  padding: 2px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+}
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="http://localhost:8080/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span data-feather="home"></span>
+                            <a href="/colecciones/El ABC" class="btn ">El ABC</a>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            <a href="/colecciones/El 123" class="btn ">El 123</a>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart"></span>
+                            Multicampos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="usuario"></span>
+                            Letra Cursiva
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2"></span>
+                            I do Speak English
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            <a href="/home" class="btn ">home</a>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <!-- <<<<<<<<<<<<<<<<<   inicio de row >>>>>>>>>>>>>>>>> -->
+
+            <div th:each="plan : ${planeaciones}">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <p th:text="${plan.nombre}">value</p>
+                    </h1>
+                </div>
+
+
+                    <h1 class="h4">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">tipo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div th:each="doc : ${plan.getDocumentos()}">
+                                <tr>
+                                    <th scope="row">
+
+                                        <p th:text="${doc.id}">value</p>
+
+                                    </th>
+                                    <td>
+                                        <p th:text="${doc.nombre}">value</p>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{http://localhost:8080/documento/{orderId}(orderId=${doc.id})}">view</a>
+                                    </td>
+                                    <td>
+                                        <p th:text="${doc.mimeType}">value</p>
+                                    </td>
+                                </tr>
+                            </div>
+                            </tbody>
+                        </table>
+                    </h1>
+
+            </div>
+        </main>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="js/dist/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="js/dist/dashboard.js"></script></body>
+</body></html>

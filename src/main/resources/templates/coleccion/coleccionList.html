@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coleccion</title>
+</head>
+<body>
+<h1>Colecciones</h1>
+<tbody>
+<div th:each="coleccion: ${colecciones}">
+    <tr>
+        <a th:href="@{/coleccionDetail/${coleccion.id}}">
+            Detalle primera opción
+        </a>
+        <td th:text="${escuela.id}"/>
+        <td th:text="${escuela.name}"/>
+    </tr>
+    <tr>
+        <a th:href="@{/coleccionDetail/(id=${coleccion.id},name=${coleccion.nombre})}">
+            Detalle de coleccion opción
+        </a>
+    </tr>
+</div>
+</tbody>
+</body>
+</html>

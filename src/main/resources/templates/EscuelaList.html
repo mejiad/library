@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Escuelas</title>
+</head>
+<body>
+<h1>Escuelas</h1>
+<tbody>
+<div th:each="escuela: ${escuelas}">
+    <tr>
+        <a th:href="@{/escuelaDetail/${escuela.id}}">
+            Detalle primera opción
+        </a>
+        <td th:text="${escuela.id}"/>
+        <td th:text="${escuela.name}"/>
+    </tr>
+    <tr>
+        <a th:href="@{/blogDetail/(id=${escuela.id},name=${escuela.name})}">
+            Detalle segunda opción
+        </a>
+    </tr>
+</div>
+</tbody>
+</body>
+</html>
