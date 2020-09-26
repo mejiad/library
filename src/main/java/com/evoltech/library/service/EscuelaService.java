@@ -35,7 +35,6 @@ public class EscuelaService {
                listColecciones.stream().collect(groupingBy(Coleccion::getEdicion));
 
        for (String key: coleccionesByEdicion.keySet() ) {
-           log.warn("Key del grouping: " + key);
            List<Coleccion> colList = coleccionesByEdicion.get(key);
        }
        return coleccionesByEdicion;
