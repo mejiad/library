@@ -29,6 +29,9 @@ public class Coleccion extends BaseJpaEntity<Long> implements Serializable {
     @NotEmpty
     private String edicion;
 
+    @Transient
+    private boolean isEnable = false;
+
     @OneToMany
     private List<Documento> documentos = new ArrayList<>();
 

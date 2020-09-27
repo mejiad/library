@@ -58,15 +58,24 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
                 "pdf",
                 "01-01-2020",
                 null);
+        Documento documento02 = new Documento("Nombre del documento 01.1",
+                "Libro",
+                "Descripción del documento 01.1",
+                "/pdf/pdf01.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
 
         documentoRepository.save(documento);
         coleccion.addDocumento(documento);
+        documentoRepository.save(documento02);
+        coleccion.addDocumento(documento02);
 
         // documento
         documento = new Documento("Nombre del documento 02",
                 "Guía Pedagógica",
                 "Descripción del documento 02",
-                "/pdf/pdf01.pdf",
+                "/pdf/PREE-1-MIALBUM-BAJA.pdf",
                 "pdf",
                 "01-01-2020",
                 null);
@@ -82,7 +91,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         documento = new Documento("Nombre del documento 03",
                 "Libro",
                 "Descripción del documento 02",
-                "pdf/pdf02.pdf",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
                 "pdf",
                 "01-01-2020",
                 null);

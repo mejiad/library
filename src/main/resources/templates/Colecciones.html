@@ -125,7 +125,7 @@
                                     <div class="card-body text-center">
                                         <img th:attr="src=@{/images/ABC_trabajo_1_N3.png}">
                                         <ul class="list-unstyled mt-3 mb-4">
-                                            <p th:text="${coleccion.getGuid()}">value</p>
+                                            <p th:text="${coleccion.isEnable()}">value</p>
                                             <p th:text="${coleccion.id}">value</p>
                                         </ul>
                                         <button type="button" class="btn btn-lg btn-block btn-primary"><a th:href="@{/documentos/{guid}(guid=${coleccion.getGuid()})}" class="btn btn-lg btn-primary">Entrar</a></button>

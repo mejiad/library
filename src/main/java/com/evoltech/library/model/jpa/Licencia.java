@@ -1,7 +1,6 @@
 package com.evoltech.library.model.jpa;
 
 import com.evoltech.library.model.base.BaseJpaEntity;
-import com.evoltech.library.util.LicenciaEstado;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +34,7 @@ public class Licencia extends BaseJpaEntity<Long> implements Serializable {
 
     @NotEmpty @NotBlank
     private String nombre;
+    private int asientos;
 
     private boolean isEnable;
 

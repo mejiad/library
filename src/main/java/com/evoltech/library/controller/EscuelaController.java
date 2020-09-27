@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,9 +52,8 @@ public class EscuelaController {
         List<Coleccion> list = coleccionRepository.findByNombre(nombre);
 
         Coleccion col;
-        log.warn("lista: " + list.size() + " Nombre: " + nombre);
 
-       escuelaService.getColeccionesByEdicion(nombre);
+       escuelaService.getColeccionesByNameOrderByEdicion(nombre);
 
         if (list != null && list.size() > 0) {
             col = list.stream()
@@ -66,7 +64,8 @@ public class EscuelaController {
             col = null;
         }
 
-        Map<String, List<Coleccion>> colecciones = escuelaService.getColeccionesByEdicion(nombre);
+        Map<String, List<Coleccion>> colecciones = escuelaService.getColeccionesByNameOrderByEdicion(nombre);
+
         model.addAttribute("colecciones", colecciones);
 
         return "Colecciones";
@@ -85,7 +84,6 @@ public class EscuelaController {
     public String documento(@PathVariable String guid, Model model){
 
         Documento documento = documentoRepository.findByGuid(guid);
-
         model.addAttribute("documento", documento);
 
         return "Documento";
