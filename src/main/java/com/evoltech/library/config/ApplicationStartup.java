@@ -54,7 +54,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         documento = new Documento("Nombre del documento 01",
                 "Libro",
                 "Descripción del documento 01",
-                "http://localhost:8080/pdf/pdf02.pdf",
+                "/pdf/pdf02.pdf",
                 "pdf",
                 "01-01-2020",
                 null);
@@ -101,30 +101,136 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         //+<<<<<<<<<<<<<<<<<<<<<<<<<<<   anc nivel 1 ed 2017 >>>>>>>>>>>>>>>>>>>>>>>>>>>+
         coleccion = new Coleccion("El ABC", "Nivel 1", "Ed. 2017");
-        coleccion = new Coleccion("El ABC", "Nivel 2", "Ed. 2015");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
+
+        coleccion = new Coleccion("El ABC", "Nivel 2", "Ed. 2015");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
+        coleccionRepository.save(coleccion);
+
         coleccion = new Coleccion("El ABC", "Nivel 2", "Ed. 2017");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
 
         coleccion = new Coleccion("El ABC", "Nivel 3", "Ed. 2015");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
+
         coleccion = new Coleccion("El ABC", "Nivel 3", "Ed. 2017");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
 
         // EL 123
         coleccion = new Coleccion("El 123", "Nivel 1", "Ed. 2015");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
+
         coleccion = new Coleccion("El 123", "Nivel 1", "Ed. 2017");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
 
         coleccion = new Coleccion("El 123", "Nivel 2", "Ed. 2015");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
+
         coleccion = new Coleccion("El 123", "Nivel 2", "Ed. 2017");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
 
         coleccion = new Coleccion("El 123", "Nivel 3", "Ed. 2015");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
+
         coleccion = new Coleccion("El 123", "Nivel 3", "Ed. 2017");
+        documento = new Documento("Nombre del documento 03",
+                "Libro",
+                "Descripción del documento 02",
+                "/pdf/PREE-2-MIALBUM-BAJA.pdf",
+                "pdf",
+                "01-01-2020",
+                null);
+        documentoRepository.save(documento);
+        coleccion.addDocumento(documento);
         coleccionRepository.save(coleccion);
     }
 
@@ -135,13 +241,16 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             List<Coleccion> listColeccion = coleccionRepository.findByNombreAndNivelAndEdicion("El ABC",
                     "Nivel 1", "Ed. 2015" );
             Coleccion coleccion;
+            /*
             if (listColeccion.size() > 0) {
                 coleccion = listColeccion.get(0);
                 Licencia licencia = new Licencia("001", coleccion, true);
                 escuela.addLicencia(licencia);
             }
+             */
+            addLicenciasRandom(escuela);
             if (i == 0) {
-                Usuario user01 = new Usuario("user01@mail.com", "usurio 01", "alal");
+                Usuario user01 = new Usuario("user01@mail.com", "usuario 01", "alal");
                 escuela.addUsuario(user01);
             }
             for (int k = 0; k < MAX_USUARIOS; k++){
@@ -150,6 +259,21 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             }
             escuelaRepository.save(escuela);
         }
+    }
+
+    private void addLicenciasRandom(Escuela escuela){
+        Random rand = new Random();
+        List<Coleccion> colecciones = coleccionRepository.findAll();
+
+        int i = 0;
+        for (Coleccion coleccion: colecciones) {
+            if(rand.nextInt(3) > 0){
+                String licenciaNombre = "Random." + i;
+                Licencia licencia = new Licencia(licenciaNombre, coleccion, true);
+                escuela.addLicencia(licencia);
+            }
+        }
+
     }
 
     private String[] lastName = {"García", "González", "Rodríguez", "Fernández", "López",

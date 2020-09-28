@@ -53,32 +53,34 @@ public class EscuelaController {
     @RequestMapping(value = "/colecciones/{coleccion}", method= RequestMethod.GET)
     public String colecciones(@PathVariable String coleccion, HttpServletRequest request, Model model){
         Principal principal = request.getUserPrincipal();
+        String userName = principal.getName();
+
         log.warn(" Coleccion: " + coleccion);
         log.warn(" Principal: " + principal.getName());
-        String nombre = "El ABC";
 
+        String nombre = "El ABC";
         if (coleccion != null && coleccion.length() > 0) {
             nombre = coleccion;
         }
-        List<Coleccion> list = coleccionRepository.findByNombre(nombre);
-
+        List<Coleccion> listTotal = coleccionRepository.findByNombre(nombre);
         Coleccion col;
+       // escuelaService.getColeccionesByNameOrderByEdicion(nombre);
 
-       escuelaService.getColeccionesByNameOrderByEdicion(nombre);
-
+        /*
         if (list != null && list.size() > 0) {
-            col = list.stream()
-                    .findFirst()
-                    .get();
+            col = list.stream().findFirst().get();
             List<Documento> listDocs = col.getDocumentos();
         } else {
             col = null;
         }
+        */
 
-        Map<String, List<Coleccion>> colecciones = escuelaService.getColeccionesByNameOrderByEdicion(nombre);
+        Long id = escuelaService.findIdByEmail(userName);
+        List<Coleccion> coleccionesForUser = escuelaService.getColeccionesByLicenciasForUser(id);
+
+        Map<String, List<Coleccion>> colecciones = escuelaService.getColeccionesByNameOrderByEdicion(nombre, userName);
 
         model.addAttribute("colecciones", colecciones);
-
         return "Colecciones";
     }
 

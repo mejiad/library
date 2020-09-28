@@ -23,8 +23,13 @@ public class EscuelaService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-   public Map<String, List<Coleccion>> getColeccionesByNameOrderByEdicion(String nombre){
-        List<Coleccion> listColecciones = coleccionRepository.findByNombre(nombre);
+   public Map<String, List<Coleccion>> getColeccionesByNameOrderByEdicion(String nombre, String userName){
+       Long id = findIdByEmail(userName);
+       List<Coleccion> coleccionesForUser = getColeccionesByLicenciasForUser(id);
+
+       List<Coleccion> listColecciones = coleccionRepository.findByNombre(nombre);
+       List<Coleccion> listFiltrada = filterColecciones(listColecciones, coleccionesForUser);
+
        return listColecciones.stream().collect(groupingBy(Coleccion::getEdicion));
     }
 
@@ -36,18 +41,19 @@ public class EscuelaService {
         return listDocumentos.stream().collect(groupingBy(Documento::getCategoria));
     }
 
-    public ArrayList<Coleccion> getLicenciasForUser(Long id) {
+    public ArrayList<Coleccion> getColeccionesByLicenciasForUser(Long id) {
         Usuario usuario = usuarioRepository.getOne(id);
         Escuela escuela = usuario.getEscuela();
         List<Licencia> licencias = escuela.getLicencias();
         ArrayList<Coleccion> colecciones = new ArrayList<>();
         for (Licencia licencia : licencias) {
             colecciones.add(licencia.getColeccion());
+            log.warn(" Coleccion by user: " + licencia.getColeccion().getNombre());
         }
        return colecciones;
     }
 
-    public List<Coleccion> filterColecciones(ArrayList<Coleccion> colecciones, ArrayList<Coleccion> coleccionesByEscuela) {
+    public List<Coleccion> filterColecciones(List<Coleccion> colecciones, List<Coleccion> coleccionesByEscuela) {
         for (Coleccion col : coleccionesByEscuela ) {
             if (colecciones.contains(col)){
                 col.setEnable(true);
@@ -55,6 +61,11 @@ public class EscuelaService {
             }
         }
         return colecciones;
+    }
+
+    public Long findIdByEmail(String email){
+       log.warn(" Usuario a buscar: " + email);;
+        return usuarioRepository.findByEmailIgnoreCase(email).getId();
     }
 
 }

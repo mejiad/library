@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +12,7 @@
 
     <!-- Bootstrap core CSS
     -->
-    <link href="http://localhost:8080/appcss/bootstrap.min.css" rel="stylesheet">
+    <link href="/appcss/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -128,10 +127,8 @@
                                         <ul class="list-unstyled mt-3 mb-4">
                                             <p th:text="${coleccion.isEnable()}">value</p>
                                             <p th:text="${coleccion.id}">value</p>
-                                            <div sec:authorize="isAuthenticated()">
-                                                Authenticated as <span sec:authentication="name"></span></div>
                                         </ul>
-                                        <button type="button" class="btn btn-lg btn-block btn-primary"><a th:href="@{/documentos/{guid}(guid=${coleccion.getGuid()})}" class="btn btn-lg btn-primary">Entrar</a></button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary"><a th:href="@{/documentos/{guid}(guid=${coleccion.getGuid()})}" class="btn btn-lg btn-primary" th:if="${coleccion.isEnable()}">Entrar</a></button>
                                     </div>
                                 </div>
                             </div>
