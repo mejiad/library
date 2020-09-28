@@ -51,7 +51,7 @@ public class RegisterApplicationTests {
 		log.info("<<<<<<<<<<<<<<<<<<<<<  2   >>>>>>>>>>>>>>>>>>>>>>>>");
 		Escuela escuela = new Escuela("Escuela Test");
 
-		Usuario usuario = new Usuario("email test", "Maestra Test");
+		Usuario usuario = new Usuario("email test", "Maestra Test", "2244");
 		escuela.addUsuario(usuario);
 
 		escuelaRepository.save(escuela);

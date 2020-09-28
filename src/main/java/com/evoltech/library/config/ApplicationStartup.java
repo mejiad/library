@@ -54,14 +54,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         documento = new Documento("Nombre del documento 01",
                 "Libro",
                 "Descripción del documento 01",
-                "/pdf/pdf01.pdf",
+                "http://localhost:8080/pdf/pdf02.pdf",
                 "pdf",
                 "01-01-2020",
                 null);
         Documento documento02 = new Documento("Nombre del documento 01.1",
                 "Libro",
                 "Descripción del documento 01.1",
-                "/pdf/pdf01.pdf",
+                "/pdf/pdf02.pdf",
                 "pdf",
                 "01-01-2020",
                 null);
@@ -140,6 +140,10 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
                 Licencia licencia = new Licencia("001", coleccion, true);
                 escuela.addLicencia(licencia);
             }
+            if (i == 0) {
+                Usuario user01 = new Usuario("user01@mail.com", "usurio 01", "alal");
+                escuela.addUsuario(user01);
+            }
             for (int k = 0; k < MAX_USUARIOS; k++){
                 Usuario usuario = createUsuario();
                 escuela.addUsuario(usuario);
@@ -165,7 +169,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         int unico = rand.nextInt(1000);
         String email = names[idxName] + "." + lastName[idxLastname] + "." + unico + "@gmail.com";
         String name = names[idxName] + " " + lastName[idxLastname];
-        Usuario usuario = new Usuario(email, name);
+        Usuario usuario = new Usuario(email, name, "2244");
         return usuario;
     }
 
@@ -178,7 +182,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             int randName = rand.nextInt(30);
             String email = names[idxName] + "." + lastName[idxLastname] + randName + "@gmail.com";
             String name = names[idxName] + " " + lastName[idxLastname] + " " + randName;
-            usuarios[i] = new Usuario(email, name);
+            usuarios[i] = new Usuario(email, name, "2244");
         }
     }
 

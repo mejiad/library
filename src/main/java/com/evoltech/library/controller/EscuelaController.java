@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +36,13 @@ public class EscuelaController {
     @Autowired
     EscuelaService escuelaService;
 
+    @RequestMapping(value = "/", method= RequestMethod.GET)
+    public String homepage(Model model){
+        List<Escuela> escuelas = escuelaRepository.findAll();
+        model.addAttribute("escuelas", escuelas);
+        return "HomePage";
+    }
+
     @RequestMapping(value = "/home", method= RequestMethod.GET)
     public String home(Model model){
         List<Escuela> escuelas = escuelaRepository.findAll();
@@ -42,8 +51,10 @@ public class EscuelaController {
     }
 
     @RequestMapping(value = "/colecciones/{coleccion}", method= RequestMethod.GET)
-    public String colecciones(@PathVariable String coleccion, Model model){
+    public String colecciones(@PathVariable String coleccion, HttpServletRequest request, Model model){
+        Principal principal = request.getUserPrincipal();
         log.warn(" Coleccion: " + coleccion);
+        log.warn(" Principal: " + principal.getName());
         String nombre = "El ABC";
 
         if (coleccion != null && coleccion.length() > 0) {

@@ -2,6 +2,8 @@ package com.evoltech.library.model.jpa;
 
 import com.evoltech.library.model.base.BaseJpaEntity;
 import lombok.*;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,14 +18,18 @@ import java.io.Serializable;
 @Data
 public class Usuario extends BaseJpaEntity<Long> implements Serializable {
 
-    public Usuario(String email, String nombre) {
+    public Usuario(String email, String nombre, String password) {
         this.email= email;
         this.nombre= nombre;
-        this.role = "Maestra";
+        this.password = password;
+        this.role = "USER";
+        PasswordEncoder encoder = PasswordEncoderFactories.
+                createDelegatingPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 
-    public Usuario(String email, String nombre, String role){
-        this(email, nombre);
+    public Usuario(String email, String nombre, String password, String role){
+        this(email, nombre, password);
         this.role = role;
     }
 
@@ -31,13 +37,18 @@ public class Usuario extends BaseJpaEntity<Long> implements Serializable {
     private Long id;
 
     @NotEmpty @NotBlank @Column(unique = true)
-    String email;
+    private String email;
 
     @NotEmpty @NotBlank
-    String nombre;
+    private String nombre;
 
     @NotEmpty
-    String role;
+    private String role;
+
+    @NotEmpty
+    private String password;
+
+    private boolean enabled = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "escuela_id")
