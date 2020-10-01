@@ -46,7 +46,7 @@
 }
     </style>
     <!-- Custom styles for this template -->
-    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/carousel.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -112,27 +112,34 @@
                         <snap th:text="${key}"></snap>
                     </h1>
                 </div>
-                <div class="grid-container" style="grid-auto-flow: row;">
+                <div class="container marketing">
                     <div th:each="documento : ${arrDocs}">
                         <p th:text="${documento.nombre}">value</p>
-                        <div class="item1">
-                            <div class="col-12 themed-grid-col">
 
-                                <div class="card mb-4 shadow-sm">
-                                    <div class="card-header text-center">
-                                        <h4 class="my-0 font-weight-normal"><p th:text="${documento.nombre}">value</p></h4>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <img th:attr="src=@{/images/ABC_trabajo_1_N3.png}">
-                                        <ul class="list-unstyled mt-3 mb-4">
-                                            <p th:text="${documento.categoria}">value</p>
-                                            <p th:text="${documento.id}">value</p>
-                                        </ul>
-                                        <button type="button" class="btn btn-lg btn-block btn-primary"><a th:href="@{/documento/{guid}(guid=${documento.getGuid()})}" class="btn btn-lg btn-primary">Entrar</a></button>
-                                    </div>
-                                </div>
+                        <hr class="featurette-divider">
+
+                        <div class="row featurette">
+                            <div class="col-md-5 order-md-2">
+                                <h2 class="featurette-heading">Guía de Estudio. <span class="text-muted">Guía para los padres.</span></h2>
+                                <p class="lead">Libro con las actividades para maestros.</p>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="/images/ABC_trabajo_N1_0.png" width="500">
                             </div>
                         </div>
+
+                        <hr class="featurette-divider">
+
+                        <div class="row featurette">
+                                    <div class="col-md-5 ">
+                                        <h2 class="featurette-heading">Guía de Estudio. <span class="text-muted">Guía para los padres.</span></h2>
+                                        <p class="lead">Libro con las actividades para maestros.</p>
+                                    </div>
+                                    <div class="col-md-6 order-md-1">
+                                        <img src="/images/ABC_trabajo_N1_0.png" width="500">
+                                    </div>
+                                </div>
+
                     </div>
                 </div>
             </div>

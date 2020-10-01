@@ -29,21 +29,21 @@
           font-size: 3.5rem;
         }
       }
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto;
-  grid-gap: 2px;
-  background-color: #9F81F7;
-  padding: 2px;
-}
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-template-rows: auto auto;
+      grid-gap: 2px;
+      background-color: #FFFFFF;
+      padding: 2px;
+    }
 
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.2);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 20px;
-}
+    .grid-container > div {
+      background-color: rgba(255, 255, 255, 0.2);
+      text-align: center;
+      padding: 20px 0;
+      font-size: 20px;
+    }
     </style>
     <!-- Custom styles for this template -->
     <link href="http://localhost:8080/css/dashboard.css" rel="stylesheet">
@@ -104,7 +104,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <!-- <<<<<<<<<<<<<<<<<   inicio de row >>>>>>>>>>>>>>>>> -->
 
             <div th:each="entry, stats : ${colecciones}" th:with="arrCol=${entry.value}, key=${entry.key}" >
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -128,7 +127,14 @@
                                             <p th:text="${coleccion.isEnable()}">value</p>
                                             <p th:text="${coleccion.id}">value</p>
                                         </ul>
-                                        <button type="button" class="btn btn-lg btn-block btn-primary"><a th:href="@{/documentos/{guid}(guid=${coleccion.getGuid()})}" class="btn btn-lg btn-primary" th:if="${coleccion.isEnable()}">Entrar</a></button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" th:if="${coleccion.isEnable()}" >
+                                            <a th:href="@{/documentos/{guid}(guid=${coleccion.getGuid()})}" class="btn btn-lg btn-primary" th:if="${coleccion.isEnable()}">Entrar</a>
+                                            <a class="btn btn-lg btn-danger" th:if="${!coleccion.isEnable()}">Disable</a>
+                                        </button>
+                                        <button type="button" class="btn btn-lg btn-block btn-disable" th:if="${!coleccion.isEnable()}" >
+                                            <a th:href="@{/documentos/{guid}(guid=${coleccion.getGuid()})}" class="btn btn-lg btn-primary" th:if="${coleccion.isEnable()}">Entrar</a>
+                                            <a class="btn btn-lg btn-danger" th:if="${!coleccion.isEnable()}">Disable</a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -136,9 +142,12 @@
                     </div>
                 </div>
             </div>
+        <div th:insert="fragments.html :: footer">  </footer> </div>
         </main>
     </div>
+
 </div>
+
 <!--
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="js/dist/bootstrap.bundle.min.js"></script>
@@ -146,5 +155,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="js/dist/dashboard.js"></script>
 -->
-</body>
 </body></html>
